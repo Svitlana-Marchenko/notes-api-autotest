@@ -28,6 +28,7 @@ export class NotesService implements INotesService {
   }
 
   async deleteById(id: string): Promise<{ success: boolean }> {
+    await this.getById(id);
     await this.noteRepository.delete(id);
     return { success: true };
   }
@@ -47,10 +48,6 @@ export class NotesService implements INotesService {
 
   async update(id: string, dto: IUpdateNoteDto): Promise<INoteDto> {
     const note = await this.getById(id);
-
-    if (!note) {
-      throw new NotFoundException(`Note with ID ${id} was not found`);
-    }
 
     if (dto.title !== undefined) {
       note.title = dto.title;

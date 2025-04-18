@@ -1,4 +1,5 @@
 import request from 'supertest';
+import { randomUUID } from 'crypto';
 
 const port = process.env.PORT || 3000;
 const baseUrl = `http://localhost:${port}`;
@@ -70,14 +71,14 @@ describe('External Notes API (e2e)', () => {
 
   it('PUT /notes/:id - error 404 when updating nonexistent note', async () => {
     await request(baseUrl)
-      .put('/notes/nonexistent-id')
+      .put(`/notes/${randomUUID()}`)
       .send({ title: 'Should fail' })
       .expect(404);
   });
 
   it('GET /notes/:id - error 404 when retrieving nonexistent note', async () => {
     await request(baseUrl)
-      .get('/notes/nonexistent-id')
+      .get(`/notes/${randomUUID()}`)
       .expect(404);
   });
 
@@ -93,7 +94,7 @@ describe('External Notes API (e2e)', () => {
 
   it('DELETE /notes/:id - error 404 when deleting nonexistent note', async () => {
     await request(baseUrl)
-      .delete('/notes/nonexistent-id')
+      .delete(`/notes/${randomUUID()}`)
       .expect(404);
   });
 });

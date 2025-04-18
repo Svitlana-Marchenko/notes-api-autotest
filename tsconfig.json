@@ -14,7 +14,11 @@
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
+    "types": ["jest", "node"]
   },
   "include": ["src"]
     "strictNullChecks": true,
